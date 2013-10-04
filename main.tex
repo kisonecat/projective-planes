@@ -1,6 +1,6 @@
 \documentclass[14pt]{chalkfjord}
 
-%\includeonlyframes{adding}
+\includeonlyframes{title}
 
 \usepackage{ulem}
 \usetikzlibrary{matrix,arrows}
@@ -100,13 +100,28 @@
 
 \newcommand{\clearbackgroundpicture}{\usebackgroundtemplate{}}
 
+\makeatletter
+\define@key{beamerframe}{nofills}[true]{% top
+  \beamer@frametopskip=0pt\relax%
+  \beamer@framebottomskip=0pt\relax%
+  \beamer@frametopskipautobreak=\beamer@frametopskip\relax%
+  \beamer@framebottomskipautobreak=\beamer@framebottomskip\relax%
+  \def\beamer@initfirstlineunskip{%
+    \def\beamer@firstlineitemizeunskip{%
+      \vskip-\partopsep\vskip-\topsep\vskip-\parskip%
+      \global\let\beamer@firstlineitemizeunskip=\relax}%
+    \everypar{\global\let\beamer@firstlineitemizeunskip=\relax}}
+}
+\makeatother
+
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 
 \author{Jim Fowler}
-\date{April 20, 2011}
+%\date{April 20, 2011}
+\date{October 5, 2013}
 \title{Projective Planes}
 
 \newcommand{\quat}[1]{\mathbf{#1}}
@@ -116,20 +131,24 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % nice looking title
-\begin{frame}
-  \begin{center}
-    \begin{tikzpicture}
-      \useasboundingbox (-3,-3) rectangle (3,3);
-      \node (radicalpi) at (0,0) {\scalebox{10}{$\sqrt{\pi}$}};
-      \fill[color=white,opacity=0.7] (-6,-3) rectangle (6,3);
+\begin{frame}[nofills,label=title]
+  \vfill
 
-      \node (radicalpi) at (0,0) {\Huge\textbf{\inserttitle}};
+  \noindent {\Huge\scalebox{1.8}{\textbf{Projective}}} \vspace{-2.2ex}\\
+  \noindent\null\hspace{2in}{\Huge\scalebox{1.8}{\textbf{Planes}}}
 
-      \node (radicalpi) at (0,-2) {\insertauthor};
-      \node (radicalpi) at (0,-3) {\insertdate};
-    \end{tikzpicture}
-  \end{center}
+  \vfill
+  \large
+  \noindent \textsf{\textbf{Jim Fowler}}\hfill\textsf{The Ohio State University}
+
+  \vfill
+  \footnotesize
+
+  \noindent Undergraduate Mathematics Symposium \hfill 5 October 2013 \\
+  \noindent at the University of Illinois at Chicago
+
 \end{frame}
+
 \clearbackgroundpicture
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
