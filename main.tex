@@ -1,6 +1,6 @@
 \documentclass[14pt]{chalkfjord}
 
-\includeonlyframes{title}
+\includeonlyframes{thanks}
 
 \usepackage{ulem}
 \usetikzlibrary{matrix,arrows}
@@ -2050,13 +2050,18 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \Huge
-  \vfill
-  \begin{center}
-    Thank You!
-  \end{center}
-  \vfill
-\end{frame}
+ \clearbackgroundpicture
+ \begin{frame}[nofills,label=thanks]
+   \vfill
+   \begin{center}
+   \Huge
+    \scalebox{1.5}{\textbf{Thank You}}
+   \end{center}
+   \vfill
+   \includegraphics[width=1in]{cc-logo.pdf}
+   \hfill\footnotesize\scalebox{0.9}{licensed for reuse under a Creative Commons BY-NC-SA License}
+   \null
+ \end{frame}
+
 
 \end{document}
