@@ -1,6 +1,6 @@
 \documentclass[14pt]{chalkfjord}
 
-\includeonlyframes{thanks}
+\includeonlyframes{distributive-law}
 
 \usepackage{ulem}
 \usetikzlibrary{matrix,arrows}
@@ -254,11 +254,12 @@
 \againframe<5>{overview}
 
 \setbackgroundpicture{Railroad-Tracks-Perspective.jpg}
-\begin{frame}
+\begin{frame}[nofills,label=what-is-plane]
+  \color{black}\Large\textbf{\scalebox{1.2}{What is a projective plane?}}
   \pause
   \vfill
   \vspace{0.5in}
-  \color{white}\Large
+  \color{white}\huge
   \begin{center}
   \textbf{Parallel lines} \\
   \textbf{meet at infinity}
@@ -404,24 +405,25 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % definition of division ring
-\begin{frame}
+\begin{frame}[label=definition-division-ring]
   \begin{definition}
-    A \textbf{division ring} \textcolor{gray}{(``skew field'')} is a set $R$ \\
+    A \uncover<2->{\textbf{division ring}} \textcolor{gray}{\uncover<2->{(``skew} \alt<1>{\textcolor{black}{field}}{field}\uncover<2->{'')}} is a set $R$ \\
     \quad with two operations $+$ and $\times$ \\
-    \quad so that $(R,+)$ is an abelian group \\
-    \quad and $(R,\times)$ is a group \\
+    \quad so that $(R,+)$ is an abelian group with identity 0\\
+    \quad and $(R \setminus \{0\},\times)$ is a\uncover<1>{n abelian} group \\
     \quad\quad so that $\times$ distributes over $+$.
   \end{definition}
 
   \vfill
-  \pause
+  \uncover<3->{
   \textbf{Warning:} Multiplication in a division ring \\
-  \quad does not necessarily commute!
+  \quad does not necessarily commute!}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % build projective plane from division ring
 \begin{frame}
+  \frametitle{From rings to planes}
 
   $R$ be a division ring.
 
@@ -429,8 +431,8 @@
 
   $P^2(R)$ is a projective plane, in which
   \begin{description}
-  \item[points] are lines in $R^3$,
-  \item[lines] are planes in $R^3$.
+  \item[``points''] are lines in $R^3$,
+  \item[``lines''] are planes in $R^3$.
   \end{description}
 
   \vfill\pause
@@ -440,6 +442,7 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Coordinates}
 
   \vfill
 
@@ -609,8 +612,7 @@
   
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{frame}[label=real-projective-plane]
   \frametitle{Real projective plane}
 
   \begin{columns}
@@ -854,13 +856,13 @@
       }
     \end{column}
   \end{columns}
-
+  \uncover<24>{.}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[label=identification-polygon]
 
   \begin{center}
-    \begin{tikzpicture}[scale=4]
+    \begin{tikzpicture}[scale=6]
       \draw (0,0) rectangle (1,1);
       \draw[
       decoration={markings,mark=at position 1 with {\arrow[scale=4]{>}}},
@@ -910,8 +912,12 @@
 \begin{frame}
   \frametitle{Complex projective plane}
 
+  %BADBAD could include a picture here
+
   \vfill
-  $\mathbb{C}P^2$
+  \begin{center}
+    \scalebox{6}{$\mathbb{C}P^2$}
+  \end{center}
   \vfill
   
   $\dim_{\mathbb{R}} \mathbb{C}P^2 = 4$.
@@ -920,23 +926,26 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % main question
-\begin{frame}
+\begin{frame}[label=main-question]
   \begin{center}
+    \large
   \begin{tikzpicture}
     \node (division) at (0,0) {division ring};
     \node (projective) at (5,0) {projective plane};
     \only<2->{
-      \draw [->] (division) -- (projective);
+      \draw [thick,->] (division) -- (projective);
     }
     \uncover<5->{
-      \draw [->] (projective) edge[out=135,in=45] (division);
+      \draw [thick,->] (projective) edge[out=135,in=45] node[above] {\Huge\textbf{?}} (division);
     }
     
   \end{tikzpicture}
   \end{center}
-  \uncover<3->{What about the map going the other way?}
+  \uncover<3->{What about going the other way?}
 
   \vfill
+
+  \Large
 
   \uncover<4->{Given a projective plane, \\
     \quad can I recover a division ring?}
@@ -947,7 +956,7 @@
 \againframe<4-5>{overview}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{frame}[label=how-to-add]
 \frametitle{How to add}
 
 \begin{center}
@@ -1006,8 +1015,34 @@
   \pause
   \fill (ab) circle (6pt) node[anchor=south west] {$a+b$};
 
+  \pause
+  \draw[line width=5pt,opacity=0.5] (c) -- (b) -- (ab) -- cycle;
+
 \end{tikzpicture}
 \end{center}
+
+\end{frame}
+
+\begin{frame}[label=plan-of-attack]
+\frametitle{How to add (in projective plane)}
+
+\textcolor{blue}{Theorem in Euclidean plane} \\
+\quad that a certain construction on $(a,0)$ and $(b,0)$ \\
+\quad results in $(a+b,0)$.
+
+\vfill
+\pause
+
+\textcolor{blue}{Definition for a projective plane} \\
+\quad that $a$ ``plus'' $b$ results from \\
+\quad that same construction.
+
+\vfill
+\pause
+
+Elements of division ring will be \\
+\quad all but one of the \\
+\quad points on a chosen line.
 
 \end{frame}
 
@@ -1095,55 +1130,106 @@
   \path [name intersections={of=c' one line and x axis, by=ba}] ;
   \fill (ba) circle (6pt) node[anchor=south] {$b+a$};
 
-  \pause
-  \only<18-20>{
+  \pause%18
+  \only<18-22>{
     \path [draw,fill opacity=0.25,fill=red] (a') -- (b') -- (x infinity) -- cycle;
     \path [draw,fill opacity=0.25,fill=blue] (a) -- (b) -- (y infinity)
     -- cycle;
   }
 
-  \pause
+  \pause%19
+  \only<19>{
+    \draw[line width=6pt,opacity=0.5] ($ (one-infinity)!-15!(a) $) -- ($ (one-infinity)!15!(a) $);
+    \draw[line width=6pt,opacity=0.5] ($ (one-infinity)!-15!(b) $) -- ($ (one-infinity)!15!(b) $);
+    \draw[line width=6pt,opacity=0.5] (origin) circle (4in);
+  }
+
+  \pause%20
+  \only<20-22>{
+    \draw[red,line width=6pt,opacity=.25] ($ (a)!-15!(b) $) -- ($ (a)!15!(b) $);
+    \draw[red,line width=6pt,opacity=.25] ($ (a')!-15!(b') $) -- ($ (a')!15!(b') $);
+    \draw[green,line width=6pt,opacity=.25] ($ (b')!-15!(x infinity) $) -- ($ (b')!15!(x infinity) $);
+    \draw[green,line width=6pt,opacity=.25] ($ (b)!-15!(y infinity) $) -- ($ (b)!15!(y infinity) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (a')!-15!(x infinity) $) -- ($ (a')!15!(x infinity) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (a)!-15!(y infinity) $) -- ($ (a)!15!(y infinity) $);
+  }
+
+  \pause%21
   \path [name intersections={of=a y infinity and a x infinity, by=d}] ;
   \path [name intersections={of=b x infinity and b y infinity, by=d'}] ;
 
   \fill (d) circle (6pt) node[anchor=north east] {$d$};
   \fill (d') circle (6pt) node[anchor=south west] {$d'$};
 
-  \pause
-  \only<20-21>{
+  \pause%22
+  \only<22-25>{
     \draw[line width=5pt,opacity=0.5] ($ (origin)!-10!(d) $) to
     (origin) to (d) to (d') to ($ (d)!10!(d') $);
   }
 
-  \pause
+  \pause%23
   \draw[name path=ba' line] ($ (b)!-15!(a') $) -- ($ (b)!15!(a') $);
   \draw[name path=ab' line] ($ (a)!-15!(b') $) -- ($ (a)!15!(b') $);
 
-  \only<21-22>{
+  \only<23-26>{
     \path [draw,fill opacity=0.25,fill=red] (a) -- (b') -- (x
     infinity) -- cycle;
-    \path [draw,fill opacity=0.25,fill=blue] (b) -- (a') -- (y infinity) --
+    \path [draw,fill opacity=0.25,fill=blue] (a') -- (b) -- (y infinity) --
     cycle;
     \path [name intersections={of=ab' line and ba' line, by=e}] ;
   }
 
-  \pause
-  \only<22->{
+  \pause%24
+  \only<24>{
+    \draw[line width=6pt,opacity=0.5] ($ (a)!-15!(a') $) -- ($ (a)!15!(a') $);
+    \draw[line width=6pt,opacity=0.5] ($ (b')!-15!(b) $) -- ($ (b')!15!(b) $);
+    \draw[line width=6pt,opacity=0.5] (origin) circle (4in);
+  }
+
+  \pause%25
+  \only<25-26>{
+    \draw[red,line width=6pt,opacity=.25] ($ (a)!-15!(b') $) -- ($ (a)!15!(b') $);
+    \draw[red,line width=6pt,opacity=.25] ($ (a')!-15!(b) $) -- ($ (a')!15!(b) $);
+    \draw[green,line width=6pt,opacity=.25] ($ (b')!-15!(x infinity) $) -- ($ (b')!15!(x infinity) $);
+    \draw[green,line width=6pt,opacity=.25] ($ (b)!-15!(y infinity) $) -- ($ (b)!15!(y infinity) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (a')!-15!(y infinity) $) -- ($ (a')!15!(y infinity) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (a)!-15!(x infinity) $) -- ($ (a)!15!(x infinity) $);
+  }
+
+  \pause%26
+  \only<26->{
     \draw[line width=5pt,opacity=0.5] ($ (origin)!-10!(e) $) to (origin)
     to (e) to (d) to (d') to ($ (d)!10!(d') $);
   }
 
-  \pause
+  \pause%27
   \path [draw,fill opacity=0.25,fill=red] (a) -- (b') -- (c') --
   cycle;
   \path [draw,fill opacity=0.25,fill=blue] (b) -- (a') -- (c) --
   cycle;
 
-  \pause
+  \pause%28
+  \only<28>{
+    \draw[red,line width=6pt,opacity=.25] ($ (a)!-15!(b') $) -- ($ (a)!15!(b') $);
+    \draw[red,line width=6pt,opacity=.25] ($ (b)!-15!(a') $) -- ($ (b)!15!(a') $);
+    \draw[green,line width=6pt,opacity=.25] ($ (b')!-15!(c') $) -- ($ (b')!15!(c') $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (a')!-15!(c) $) -- ($ (a')!15!(c) $);
+    \draw[green,line width=6pt,opacity=.25] ($ (b)!-15!(c) $) -- ($ (b)!15!(c) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (a)!-15!(c') $) -- ($ (a)!15!(c') $);
+  }
+
+  \pause%29
+  \only<29>{
+    \draw[line width=4pt,opacity=0.5] ($ (a)!-15!(a') $) -- ($ (a)!15!(a') $);
+    \draw[line width=4pt,opacity=0.5] ($ (b)!-15!(b') $) -- ($ (b)!15!(b') $);
+    \draw[line width=4pt,opacity=0.5] ($ (c)!-15!(c') $) -- ($ (c)!15!(c') $);
+  }
+
+  \pause%30
   \draw[line width=10pt,name path=c one line,opacity=0.5]
   ($ (c)!-15!(one-infinity) $) -- ($ (c)!15!(one-infinity) $);
 
-  \pause
+  \pause%31
   
   \draw (one-infinity) node[fill=white,fill opacity=0.75,text
   opacity=1,anchor=west] {\parbox{0.75\textwidth}{Desargues
@@ -1294,7 +1380,6 @@
 \end{frame}
 
 \againframe<5->{overview}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -1492,7 +1577,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{frame}[label=distributive-law]
   \frametitle{Distributive law}
   \scriptsize
 \begin{center}
@@ -1519,20 +1604,20 @@
   \path [name intersections={of=x axis and circle at infinity, by=x infinity}] ;
   \path [name intersections={of=y axis and circle at infinity, by=y infinity}] ;
 
-  \pause
+  \pause%2
   \fill (one) circle (3pt) node[anchor=north] {1};
   \fill (origin) circle (3pt) node[anchor=north east] {0};
 
-  \pause
+  \pause%3
   \fill (one') circle (3pt) node[anchor=east] {1};
 
-  \pause
+  \pause%4
   \draw[dotted,name path=one line] ($ (one)!-15!(one') $) -- ($ (one)!15!(one') $);
 
   \path [name intersections={of=one line and circle at infinity, by=one-infinity}] ;
   \fill (one-infinity) circle (3pt) node[anchor=south] {$1_\infty$};
 
-  \pause
+  \pause%5
   \coordinate (a) at (0.8,0);
   \coordinate (b) at (1.1,0);
   \coordinate (c) at (2.40,0);
@@ -1541,111 +1626,144 @@
   \fill (b) circle (3pt) node[anchor=north west] {$b$};
   \fill (c) circle (3pt) node[anchor=north] {$c$};
 
-  \pause
+  \pause%6
   \draw[dotted,name path=a one line] ($ (a)!-15!(one-infinity) $) -- ($ (a)!15!(one-infinity) $);
   \path [name intersections={of=a one line and y axis, by=a'}] ;
   \fill (a') circle (3pt) node[anchor=east] {$a'$};
 
-  \pause
+  \pause%7
   \draw[dotted,name path=b one line] ($ (b)!-15!(one-infinity) $) -- ($ (b)!15!(one-infinity) $);
   \path [name intersections={of=b one line and y axis, by=b'}] ;
   \fill (b') circle (3pt) node[anchor=east] {$b'$};
 
-  \pause
+  \pause%8
   \draw[name path=a x infinity] ($ (a')!-15!(x infinity) $) -- ($ (a')!15!(x infinity) $);
-  \pause
+  \pause%9
   \draw[name path=b y infinity] ($ (b)!-15!(y infinity) $) -- ($ (b)!15!(y infinity) $);
 
-  \pause
+  \pause%10
   \color{red}
   \path [name intersections={of=a x infinity and b y infinity, by=d}] ;
   \fill (d) circle (3pt) node[anchor=south west] {$d$};
 
-  \pause
+  \pause%11
   \draw[name path=d one line] ($ (d)!-15!(one-infinity) $) -- ($ (d)!15!(one-infinity) $);
 
-  \pause
+  \pause%12
   \path [name intersections={of=d one line and x axis, by=ab}] ;
   \fill (ab) circle (3pt) node[anchor=south] {$a+b$};
   \path [name intersections={of=d one line and y axis, by=ab'}] ;
   \fill (ab') circle (3pt) node[anchor=south] {$a+b$};
 
-  \pause
+  \pause%13
   \color{blue}
   \draw[name path=c line] ($ (one')!-15!(c) $) -- ($ (one')!15!(c) $);
   \path [name intersections={of=c line and circle at infinity, by=c infinity}] ;
   \fill (c infinity) circle (3pt) node[anchor=south east] {$c_\infty$};
 
-  \pause
+  \pause%14
   \color{green}
   \draw[name path=abc line] ($ (c infinity)!-15!(ab') $) -- ($ (c infinity)!15!(ab') $);
   \path [name intersections={of=abc line and x axis, by=abc}] ;
   \fill (abc) circle (3pt) node[anchor=north] {$(a+b)c$};
 
-  \pause
+  \pause%15
   \color{magenta}
   \draw[name path=ac line] ($ (c infinity)!-15!(a') $) -- ($ (c infinity)!15!(a') $);
   \path [name intersections={of=ac line and x axis, by=ac}] ;
   \fill (ac) circle (3pt) node[anchor=north] {$ac$};
 
-  \pause
+  \pause%16
   \color{cyan}
   \draw[name path=bc line] ($ (c infinity)!-15!(b') $) -- ($ (c infinity)!15!(b') $);
   \path [name intersections={of=bc line and x axis, by=bc}] ;
   \fill (bc) circle (3pt) node[anchor=north east] {$bc$};
 
-  \pause
+  \pause%17
   \color{magenta}
   \draw[dotted,name path=ac one line] ($ (ac)!-15!(one-infinity) $) -- ($ (ac)!15!(one-infinity) $);
   \path [name intersections={of=ac one line and y axis, by=ac'}] ;
   \fill (ac') circle (3pt) node[anchor=west] {$ac$};
 
-  \pause
+  \pause%18
   \color{gray}
   \draw[name path=ac x infinity] ($ (ac')!-15!(x infinity) $) -- ($ (ac')!15!(x infinity) $);
 
-  \pause
+  \pause%19
   \draw[name path=bc y infinity] ($ (bc)!-15!(y infinity) $) -- ($ (bc)!15!(y infinity) $);
 
-  \pause
+  \pause%20
   \path [name intersections={of=ac x infinity and bc y infinity, by=e}] ;
   \fill (e) circle (3pt) node[anchor=south west] {$e$};  
   
-  \pause
+  \pause%21
   \draw[name path=e one line] ($ (e)!-15!(one-infinity) $) -- ($ (e)!15!(one-infinity) $);
 
-  \pause
+  \pause%22
   \path [name intersections={of=e one line and x axis, by=distributed}] ;
   \fill (distributed) circle (3pt) node[anchor=north] {$ac+bc$};
 
-  \pause
+  \pause%23
   \color{black}
   \draw[dotted,name path=abc one line] ($ (abc)!-15!(one-infinity) $) -- ($ (abc)!15!(one-infinity) $);
   \path [name intersections={of=abc one line and y axis, by=abc'}] ;
   \fill (abc') circle (3pt) node[anchor=west] {$(a+b)c$};
 
-  \pause
+  \pause%24
   \draw[name path=abc' line] ($ (abc)!-15!(ab') $) -- ($ (abc)!15!(ab') $);
   \path [name intersections={of=bc y infinity and abc' line, by=h}] ;
   \fill (h) circle (3pt) node[anchor=south west] {$f$};  
 
-  \pause
+  \pause%25
   \draw[fill opacity=0.5,fill=red] (b') -- (b) -- (bc) -- cycle;
   \draw[fill opacity=0.5,fill=red] (ab') -- (d) -- (h) -- cycle;
 
   \pause
+  \only<26>{
+    \draw[line width=6pt,opacity=0.5] ($ (b')!-15!(ab') $) -- ($ (b')!15!(ab') $);
+    \draw[line width=6pt,opacity=0.5] ($ (b)!-15!(d) $) -- ($ (b)!15!(d) $);
+    \draw[line width=6pt,opacity=0.5] ($ (bc)!-15!(h) $) -- ($ (bc)!15!(h) $);
+  }
+  
+  \pause
+  \only<27-28>{
+    \draw[red,line width=6pt,opacity=.25] ($ (b')!-15!(b) $) -- ($ (b')!15!(b) $);
+    \draw[red,line width=6pt,opacity=.25] ($ (ab')!-15!(d) $) -- ($ (ab')!15!(d) $);
+    \draw[green,line width=6pt,opacity=.25] ($ (b)!-15!(bc) $) -- ($ (b)!15!(bc) $);
+    \draw[green,line width=6pt,opacity=.25] ($ (d)!-15!(h) $) -- ($ (d)!15!(h) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (ab')!-15!(h) $) -- ($ (ab')!15!(h) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (b')!-15!(bc) $) -- ($ (b')!15!(bc) $);
+  }
+
+  \pause%28
   \draw[line width=5pt,opacity=0.5] (x infinity) -- (h) -- (d) -- (a');
 
-  \pause
-  \draw[fill opacity=0.5,fill=blue] (a') -- (ac') -- (ac) -- cycle;
+  \pause%29
+  \draw[fill opacity=0.5,fill=blue] (a') -- (ac) -- (ac') -- cycle;
   \draw[fill opacity=0.5,fill=blue] (h) -- (abc) -- (e) -- cycle;
 
+  \pause%30
+  \only<30>{
+    \draw[line width=6pt,opacity=0.5] ($ (ac)!-15!(abc) $) -- ($ (ac)!15!(abc) $);
+    \draw[line width=6pt,opacity=0.5] ($ (ac')!-15!(e) $) -- ($ (ac')!15!(e) $);
+  }
+
   \pause
+  \only<31>{
+    \draw[red,line width=6pt,opacity=.25] ($ (a')!-15!(ac) $) -- ($ (a')!15!(ac) $);
+    \draw[red,line width=6pt,opacity=.25] ($ (h)!-15!(abc) $) -- ($ (h)!15!(abc) $);
+    \draw[green,line width=6pt,opacity=.25] ($ (ac)!-15!(ac') $) -- ($ (ac)!15!(ac') $);
+    \draw[green,line width=6pt,opacity=0.5] (abc) -- (e) -- (one-infinity);
+    \draw[blue,line width=6pt,opacity=.25] ($ (h)!-15!(e) $) -- ($ (h)!15!(e) $);
+    \draw[blue,line width=6pt,opacity=.25] ($ (a')!-15!(ac') $) -- ($ (a')!15!(ac') $);
+  }
+
+  \pause%31
   \draw[line width=5pt,opacity=0.5] (abc) -- (e) -- (one-infinity);
 
 % their abc is my cba
 
-  \pause
+  \pause%32
   \node[anchor=center] (conclusion) at (0,-3) {\large and therefore $(a+b)c = ac + bc$};
 
 \end{tikzpicture}
@@ -1656,8 +1774,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Conclusion}
-  
-  \vfill
+  \large
 
   You can recover a division ring \\
   \quad from a projective plane \\
@@ -1862,7 +1979,7 @@
 
 \againframe{commutative}
 
-\begin{frame}
+\begin{frame}<1-3>[label=hessenberg]
   \frametitle{Pappus implies commutative multiplication}
 
   So if Pappus' theorem holds, \\
@@ -1879,13 +1996,15 @@
 
   \vfill\pause
 
-  What about the converse?
+  What about the converse? \pause \textbf{False!}
 
 \end{frame}
 
 \againframe{desargues}
 
 \againframe{pappus}
+
+\againframe<3-4>{hessenberg}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % example of division ring
@@ -2008,8 +2127,8 @@
   \end{proof}
   \pause
   \vfill
-  \textbf{This geometric result has\\
-    \quad no known geometric proof.}
+  \textbf{A geometric result without\\
+    \quad a ``geometric'' proof.}
 
 \end{frame}
 
@@ -2041,11 +2160,72 @@
 
   \vfill\pause
 
-  \begin{theorem}[Computer]
+  \begin{theorem}[Lam with computer]
     There is no (non-Desarguesian) projective plane \\
     \quad with $10^2 + 10 + 1 = 111$ points.
   \end{theorem}
 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \clearbackgroundpicture
+\begin{frame}[label=why-me]
+  \vfill
+  \begin{center}
+  \scalebox{2}{\Huge Why me?}
+  \end{center}
+  \vfill
+\end{frame}
+
+\begin{frame}[label=no-three-in-line]
+  \frametitle{Undergraduate research project}
+  
+  \vfill
+  
+  \textbf{The no-three-in-line problem in a group} \\
+  (F--Andrew Groot--Deven Pandya--Bart Snapp)
+
+  \vfill\pause
+
+  Find maximum size of a no-three-in-coset subset of
+  $$\mathbb{Z}_p \times \mathbb{Z}_{p^2}$$
+  among other abelian groups.
+
+  \vfill
+  
+\end{frame}
+
+\begin{frame}[nofills,label=rational-projective-planes]
+
+  \begin{theorem}[Adams]
+    If a simply-connected manifold $X$ satisfies $H^\star(X; \Z) =
+    \Z[x]/(x^3)$, then $\dim X = 4, 8, 16$.    
+  \end{theorem}
+
+  \pause%2
+  \vfill
+
+  A \textbf{rational projective plane} is  \\
+  \quad a smooth manifold $M^{4k}$ \\
+  \quad with $H^\star(X;\Q) = \Q[x]/(x^3)$ and $|x| = 2k$. \\
+
+  \pause%3
+  \vfill
+
+  \begin{theorem}[F--Zhixu Su]
+    If $M^n$ is a rational projective plane, \\
+    \quad then $n = 2^a + 2^b$ for integers $a$ and $b$.
+  \end{theorem}  
+  
+  \pause%4
+  \vfill
+
+  There is a 32-dimensional rational projective plane.
+  
+  \pause %5
+  \uncover<5-7>{No 
+    \alt<5>{$64$}{\alt<6>{$2^{14}$}{$2^{24}$}}-dimensional rational projective plane.}
+  
 \end{frame}
 
 
@@ -2058,8 +2238,13 @@
     \scalebox{1.5}{\textbf{Thank You}}
    \end{center}
    \vfill
+
+   \LaTeX\ source at \\
+     \scalebox{0.85}{\texttt{https://github.com/kisonecat/projective-planes/}}
+
+   \vfill
    \includegraphics[width=1in]{cc-logo.pdf}
-   \hfill\footnotesize\scalebox{0.9}{licensed for reuse under a Creative Commons BY-NC-SA License}
+   \hfill\footnotesize\scalebox{0.8}{licensed for reuse under a Creative Commons BY-NC-SA License}
    \null
  \end{frame}
 
